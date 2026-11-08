@@ -1,0 +1,43 @@
+---
+- name: Get vector distrib
+  ansible.builtin.get_url:
+    url: "https://packages.timber.io/vector/{{ vector_version }}/vector_{{ vector_version }}-1_amd64.deb"
+    dest: "./vector_{{ vector_version }}_amd64.deb"
+    mode: "0644"
+  tags:
+    - vector
+    - distr
+
+- name: Update apt cache
+  become: true
+  ansible.builtin.apt:
+    update_cache: true
+    cache_valid_time: 3600
+  tags:
+    - vector
+    - update
+- name: Install vector packages
+  become: true
+  ansible.builtin.apt:
+    deb: "./vector_{{ vector_version }}_amd64.deb"
+  notify: Start vector service
+  tags:
+    - vector
+    - distr
+
+- name: Config vector
+  become: true
+  ansible.builtin.template:
+    src: "templates/vector.yaml.j2"
+    dest: "/etc/vector/vector.yaml"
+    mode: "0644"
+  notify: Start vector service
+  tags:
+    - vector
+    - config
+
+- name: Flush handlers
+  ansible.builtin.meta: flush_handlers
+  tags:
+    - vector
+    - restart service
