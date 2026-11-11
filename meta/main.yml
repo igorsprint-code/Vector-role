@@ -3,12 +3,9 @@ galaxy_info:
   author: your name
   description: your role description
   company: your company (optional)
-<<<<<<< HEAD
-=======
   namespace: igor
   role_name: vector_role
   
->>>>>>> 312084f (fix_role_3)
 
   # If the issue tracker for your role is not on github, uncomment the
   # next line and provide a value
