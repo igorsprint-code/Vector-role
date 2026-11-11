@@ -20,7 +20,11 @@
   become: true
   ansible.builtin.apt:
     deb: "./vector_{{ vector_version }}_amd64.deb"
+<<<<<<< HEAD
   notify: Start vector service
+=======
+  #notify: Start vector service
+>>>>>>> 312084f (fix_role_3)
   tags:
     - vector
     - distr
@@ -31,13 +35,25 @@
     src: "templates/vector.yaml.j2"
     dest: "/etc/vector/vector.yaml"
     mode: "0644"
+<<<<<<< HEAD
   notify: Start vector service
+=======
+  #notify: Start vector service
+>>>>>>> 312084f (fix_role_3)
   tags:
     - vector
     - config
 
+<<<<<<< HEAD
 - name: Flush handlers
   ansible.builtin.meta: flush_handlers
   tags:
     - vector
     - restart service
+=======
+# - name: Flush handlers
+#   ansible.builtin.meta: flush_handlers
+#   tags:
+#     - vector
+#     - restart service
+>>>>>>> 312084f (fix_role_3)
